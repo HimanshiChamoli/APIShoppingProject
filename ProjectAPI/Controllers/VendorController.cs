@@ -60,7 +60,7 @@ namespace ProjectAPI.Controllers
                 {
                     _context.Vendors.Add(vendor);
                     await _context.SaveChangesAsync();
-                    return CreatedAtAction(nameof(Get), new { id = vendor.VendorId }, vendor);
+                    return CreatedAtAction("Get", new { id = vendor.VendorId }, vendor);
                 }
 
                     catch(Exception)

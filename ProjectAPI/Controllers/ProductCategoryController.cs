@@ -20,7 +20,7 @@ namespace ProjectAPI.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+          [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductCategory>>> Get()
         {
             return await _context.Categories.ToListAsync();

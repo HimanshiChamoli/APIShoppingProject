@@ -21,7 +21,7 @@ namespace ProjectAPI.Models
 
         public string Gender { get; set; }
 
-        public double PhoneNo { get; set; }
+        public long PhoneNo { get; set; }
 
         public string Password { get; set; }
 
@@ -29,7 +29,7 @@ namespace ProjectAPI.Models
 
         public string state { get; set; }
 
-        public string Zip { get; set; }
+        public int Zip { get; set; }
 
         public bool Shipping_Address { get; set; }
         public List<Order> Orders { get; set; }

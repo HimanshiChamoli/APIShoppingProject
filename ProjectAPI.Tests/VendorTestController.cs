@@ -1,9 +1,16 @@
+//using FluentAssertions;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore;
+//using ProjectAPI.Controllers;
+//using ProjectAPI.Models;
+//using System;
+//using Xunit;
+
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectAPI.Controllers;
 using ProjectAPI.Models;
-using System;
 using Xunit;
 
 namespace ProjectAPI.Tests
@@ -19,7 +26,7 @@ namespace ProjectAPI.Tests
 
 
         public static string connectionString =
-           "Data Source=TRD-517;Initial Catalog=ShoppingApisseDb5;Integrated Security=true;";
+           "Data Source=TRD-517;Initial Catalog=ShoppingDemoooo2;Integrated Security=true;";
         static VendorTestController()
         {
             dbContextOptions = new DbContextOptionsBuilder<ShopDataDbContext>()
@@ -57,9 +64,9 @@ namespace ProjectAPI.Tests
             Assert.IsType<OkObjectResult>(data);
             var OkResult = data.Should().BeOfType<OkObjectResult>().Subject;
             var ven = OkResult.Value.Should().BeAssignableTo<Vendor>().Subject;
-            Assert.Equal("Gaurav", ven.VendorName);
-            Assert.Equal("Gau@gmail.com", ven.EmailId);
-            Assert.Equal("Accuracy!", ven.VendorDescription);
+            Assert.Equal("Himanshi", ven.VendorName);
+            Assert.Equal("himi@gmail.com", ven.EmailId);
+            Assert.Equal("Deliver the product on time", ven.VendorDescription);
         }
         [Fact]
         public async void Task_GetVendorByID_BadResult()
@@ -83,28 +90,28 @@ namespace ProjectAPI.Tests
             };
             var data = await controller.Post(vendor);
 
-            Assert.IsType<OkObjectResult>(data);
+            Assert.IsType<CreatedAtActionResult>(data);
         }
-        //[Fact]
-        //public async void Task_Add_Invalid_AddVendor_Return_OkResult_BadRequest()
-        //{ //Arrange
-        //    var controller = new VendorController(context);
-        //    var vendor = new Vendor()
-        //    {
-        //        VendorName = "Noor",
-        //        EmailId = "Noor1@gmail.com",
-        //        PhoneNo = 128974575,
-        //        VendorDescription = "Great!"
-        //    };
-        //    var data = await controller.Post(vendor);
+        [Fact]
+        public async void Task_Add_Invalid_AddVendor_Return_OkResult_BadRequest()
+        { //Arrange
+            var controller = new VendorController(context);
+            var vendor = new Vendor()
+            {
+                VendorName = "Noor",
+                EmailId = "Noor1@gmail.com",
+                PhoneNo = 128974575,
+                VendorDescription = "Great!"
+            };
+            var data = await controller.Post(vendor);
 
-        //    Assert.IsType<BadRequestResult>(data);
-        //}
+            Assert.IsType<BadRequestResult>(data);
+        }
         [Fact]
         public async void Task_DeleteVendor_Return_OkResult()
         {
             var controller = new VendorController(context);
-            var id = 12;
+            var id = 3;
             //Act
             var data = await controller.Delete(id);
             //Assert
@@ -135,16 +142,16 @@ namespace ProjectAPI.Tests
         public async void Task_Put_VendorByID_MatchResult()
         {
             var controller = new VendorController(context);
-            int id = 7;
+            int id = 2;
 
             var Vendor = new Vendor()
 
             {
-                VendorId = 7,
-                VendorName = "Shimi",
-                EmailId="shimi@gmail.com",
-                PhoneNo=98652142478,
-                VendorDescription = "Super!"
+                VendorId = 2,
+                VendorName = "Noori",
+                EmailId = "Noori@gmail.com",
+                PhoneNo = 9088987678,
+                VendorDescription = "Efficient!"
             };
 
             var data = await controller.Put(id, Vendor);
@@ -180,7 +187,7 @@ namespace ProjectAPI.Tests
             var Vendor = new Vendor()
 
             {
-                
+
                 VendorName = "Shimi",
                 EmailId = "shimi@gmail.com",
                 PhoneNo = 98652142478,

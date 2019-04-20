@@ -19,7 +19,7 @@ namespace ProjectAPI.Tests
         { get; set; }
 
         public static string connectionString =
-          "Data Source=TRD-517;Initial Catalog=ShoppingApisseDb5;Integrated Security=true;";
+          "Data Source=TRD-517;Initial Catalog=ShoppingDemoooo2;Integrated Security=true;";
         static ProductCategoryTestController()
         {
             dbContextOptions = new DbContextOptionsBuilder<ShopDataDbContext>()
@@ -33,7 +33,7 @@ namespace ProjectAPI.Tests
 
         }
 
-       
+
 
         [Fact]
 
@@ -62,7 +62,7 @@ namespace ProjectAPI.Tests
             var OkResult = data.Should().BeOfType<OkObjectResult>().Subject;
             var pro = OkResult.Value.Should().BeAssignableTo<ProductCategory>().Subject;
             Assert.Equal("Summer Collection", pro.CategoryName);
-            Assert.Equal("Cotton Collection", pro.CategoryDescription);
+            Assert.Equal("Cotton Material", pro.CategoryDescription);
 
         }
         [Fact]
@@ -82,32 +82,30 @@ namespace ProjectAPI.Tests
             {
                 CategoryName = "Spring Collection",
                 CategoryDescription = "Floral Material"
-               
+
             };
             var data = await controller.Post(productcategory);
 
             Assert.IsType<CreatedAtActionResult>(data);
         }
-        //[Fact]
-        //public async void Task_Add_Invalid_AddVendor_Return_OkResult_BadRequest()
-        //{ //Arrange
-        //    var controller = new VendorController(context);
-        //    var vendor = new Vendor()
-        //    {
-        //        VendorName = "Noor",
-        //        EmailId = "Noor1@gmail.com",
-        //        PhoneNo = 128974575,
-        //        VendorDescription = "Great!"
-        //    };
-        //    var data = await controller.Post(vendor);
+        [Fact]
+        public async void Task_Add_Invalid_AddProductCategory_Return_BadRequest()
+        { //Arrange
+            var controller = new ProductCategoryController(context);
+            var productcategory = new ProductCategory()
+            {
+                CategoryName = "Winter Collection",
+                CategoryDescription = "Leather Material"
+            };
+            var data = await controller.Post(productcategory);
 
-        //    Assert.IsType<BadRequestResult>(data);
-        //}
+            Assert.IsType<BadRequestResult>(data);
+        }
         [Fact]
         public async void Task_DeleteProductCategory_Return_OkResult()
         {
             var controller = new ProductCategoryController(context);
-            var id = 3;
+            var id = 4;
             //Act
             var data = await controller.Delete(id);
             //Assert
@@ -144,9 +142,9 @@ namespace ProjectAPI.Tests
 
             {
                 ProductCategoryId = 2,
-                CategoryName = "Autmn Collections",
-                CategoryDescription = "Floral Collection",
-               
+                CategoryName = "Spring Collection",
+                CategoryDescription = "Floral Material",
+
             };
 
             var data = await controller.Put(id, productcategory);

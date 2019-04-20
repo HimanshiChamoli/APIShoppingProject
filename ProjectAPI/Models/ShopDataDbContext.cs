@@ -24,13 +24,20 @@ namespace ProjectAPI.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Payment> Payments  { get; set; }
+        public DbSet<Brand> Brands { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlServer("Data Source=TRD-517; Initial Catalog=ShoppingApisseDb5;Integrated Security=true;");
+        //    optionsBuilder.UseSqlServer("Data Source=TRD-517; Initial Catalog=ShoppingDemoooo2;Integrated Security=true;");
         //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<OrderProduct>(build =>
+            {
+                build.HasKey(t => new { t.OrderId, t.ProductId });
+            });
             modelBuilder.Entity<Product>()
                 .HasOne(c => c.Category)
                 .WithMany(p => p.Products)

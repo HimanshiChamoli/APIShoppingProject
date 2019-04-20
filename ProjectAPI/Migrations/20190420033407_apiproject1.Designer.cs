@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectAPI.Models;
 
 namespace ProjectAPI.Migrations
 {
     [DbContext(typeof(ShopDataDbContext))]
-    partial class ShopDataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190420033407_apiproject1")]
+    partial class apiproject1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
